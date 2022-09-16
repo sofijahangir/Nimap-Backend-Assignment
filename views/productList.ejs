@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    integrity="sha384-xeJqLiuOvjUBq3iGOjvSQSIlwrpqjSHXpduPd6rQpuiM3f5/ijby8pCsnbu5S81n" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+    integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+  <title>Ni Map Assignment</title>
+</head>
+<body>
+  <div class="container">
+
+
+
+    <h3 class="display-1">NiMap Product List </h3>
+
+
+
+
+    <h5 class="display-3">Product List </h3>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Product Desc</th>
+            <th>Product Category</th>
+            <th>Product Category Id</th>
+
+          </tr>
+        </thead>
+        <tbody>
+
+
+
+          <% productList.forEach(product=> { %>
+
+            <tr>
+              <td>
+                <%= product._id %>
+
+                  <% id=product._id %>
+              </td>
+              <td>
+                <%= product.prodName %>
+              </td>
+              <td>
+                <%= product.prodDesc %>
+              </td>
+              <td>
+                <% for (let i=0; i < categoryList.length; i++) { %>
+                  <% if (categoryList[i].id==product.prodCat) { %>
+                    <%= categoryList[i].catName %>
+                      <% } %>
+                        <% } %>
+              </td>
+              <td>
+                <%= product.prodCat %>
+              </td>
+
+
+
+            </tr>
+
+
+
+            <% }) %>
+
+
+
+
+        </tbody>
+      </table>
+
+      <nav aria-label="Page navigation example">
+
+        <ul class="pagination">
+          <% for (let i=0; i <=Math.ceil(totalPages/limit); i++) { %>
+            <li class="page-item">
+              <a class="page-link" href="/prodList?page=<%= i+1 %>">
+                <%= i+1 %>
+              </a>
+            </li>
+            <% } %>
+        </ul>
+
+      </nav>
+
+
+
+  </div>
+
+
+</body>
+</html>

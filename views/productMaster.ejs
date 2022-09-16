@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
+    integrity="sha384-xeJqLiuOvjUBq3iGOjvSQSIlwrpqjSHXpduPd6rQpuiM3f5/ijby8pCsnbu5S81n" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+    integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+  <title>Ni Map Assignment</title>
+</head>
+<body>
+  <div class="container">
+
+    <!-- New Product Modal -->
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class=" modal fade" id="addProductForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Add New Product</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="/addProduct">
+              <div class="mb-3">
+                <!-- <h5 class="display-3">Add New Category </h5> -->
+
+                <label for="exampleInputEmail1" class="form-label">Product Details </label>
+                <input type="text" name="prodName" class="form-control" id="catName" aria-describedby="emailHelp"
+                  placeholder="Product Name">
+                <br>
+                <input type="text" name="prodDesc" class="form-control" id="catName" aria-describedby="emailHelp"
+                  placeholder="Product Description">
+                <br>
+                <select name="prodCat" class="form-select" aria-label="Default select example">
+                  <option selected>Select Product Category</option>
+                  <% for (let i=0; i < categoryList.length; i++) { %>
+                    <option value="<%= categoryList[i].id %>">
+                      <%= categoryList[i].catName %>
+                    </option>
+                    <% } %>
+
+                </select>
+                <br>
+                <input type="number" name="prodQuantity" class="form-control" id="catName" aria-describedby="emailHelp"
+                  placeholder="Product Quantity">
+                <br>
+                <input type="number" name="prodPrice" class="form-control" id="catName" aria-describedby="emailHelp"
+                  placeholder="Product Price Per Item">
+
+                <!-- <div id="emailHelp" class="form-text">This will be the name of new category.</div> -->
+              </div>
+
+
+              <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- New Product Modal -->
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Update Category</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+
+            <!-- Get the previoud values automatically -->
+
+            <form id="editForm" method="POST" action="">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Update Product Details </label>
+                <input type="text" name="prodName" class="form-control" id="catName" aria-describedby="emailHelp"
+                  placeholder="Product Name">
+                <br>
+                <input type="text" name="prodDesc" class="form-control" id="catName" aria-describedby="emailHelp"
+                  placeholder="Product Description">
+                <br>
+                <input type="Number" name="prodPrice" class="form-control" id="catName" aria-describedby="emailHelp"
+                  placeholder="Product Price">
+
+                <br>
+                <select name="prodCat" class="form-select" aria-label="Default select example">
+                  <option selected>Select Product Category</option>
+                  <% for (let i=0; i < categoryList.length; i++) { %>
+                    <option value="<%= categoryList[i].id %>">
+                      <%= categoryList[i].catName %>
+                    </option>
+                    <% } %>
+
+                </select>
+
+                <!-- <div id="emailHelp" class="form-text">This will be the name of new category.</div> -->
+              </div>
+
+              <br>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+
+
+
+
+    <h3 class="display-1">NiMap Product Master </h3>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" onclick="showModal()">
+      Add New Product
+      <i class="bi bi-plus"></i>
+
+    </button>
+
+
+    <h5 class="display-3">Product List </h3>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Product Desc</th>
+            <th>Product Category</th>
+            <th>Product Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+
+
+
+          <% productList.forEach(product=> { %>
+
+            <tr>
+              <td>
+                <!-- i+1 -->
+                <%= product._id %>
+
+                  <% id=product._id %>
+              </td>
+              <td>
+                <%= product.prodName %>
+              </td>
+              <td>
+                <%= product.prodDesc %>
+              </td>
+              <td>
+                <!-- show the category name not id -->
+                <% for (let i=0; i < categoryList.length; i++) { %>
+                  <% if (categoryList[i].id==product.prodCat) { %>
+                    <%= categoryList[i].catName %>
+                      <% } %>
+                        <% } %>
+              </td>
+
+              <td>
+                <%= product.prodPrice %>
+              </td>
+              <td>
+                <button class="btn btn-primary btn-sm" onclick="editCat(`<%= product.id %>`)"><i class="bi bi-pencil-square"></i> Edit
+                </button>
+
+                <!-- <a href="" id="editBtn" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <i class="bi bi-pencil-square"></i> Edit
+              </a> -->
+                <a href="/deleteProduct/<%= product.id %>" class="btn btn-danger"><i class="bi bi-trash3"></i> Delete</a>
+              </td>
+            </tr>
+
+
+            <script>
+              function editCat(id) {
+                // Show the modal
+                // show modal
+                $('#staticBackdrop').modal('show');
+                // alert(id);
+
+                document.getElementById("editForm").action = `editProduct/${id}`;
+
+              }
+
+              function showModal() {
+                // Show the modal
+                // show modal
+                $('#addProductForm').modal('show');
+                // alert(id);
+
+                // document.getElementById("editForm").action = `edit/${id}`;
+
+              } 
+            </script>
+            <% }) %>
+
+
+
+
+        </tbody>
+      </table>
+
+
+
+  </div>
+
+
+</body>
+</html>
