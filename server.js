@@ -21,7 +21,10 @@ app.use(bodyParser.json());
 const port = process.env.PORT || 3000;
 
 // Database
-mongoose.connect('mongodb://localhost/NiMap', { useNewUrlParser: true });
+mongoose.connect(
+  'mongodb+srv://nimap:nimap@cluster0.cimciyw.mongodb.net/?retryWrites=true&w=majority',
+  { useNewUrlParser: true },
+);
 mongoose.connection
   .once('open', function () {
     console.log('Database connected Successfully');
